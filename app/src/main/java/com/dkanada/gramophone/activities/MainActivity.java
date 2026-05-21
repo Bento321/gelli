@@ -71,10 +71,15 @@ public class MainActivity extends AbsMusicContentActivity implements CabHolder {
         QueryUtil.getLibraries(media -> {
             libraries = media;
             menu.clear();
+            QueryUtil.playlistsView = null;
 
             for (BaseItemDto itemDto : libraries) {
                 if (menu.size() == 0) {
                     QueryUtil.currentLibrary = itemDto;
+                }
+
+                if ("playlists".equals(itemDto.getCollectionType())) {
+                    QueryUtil.playlistsView = itemDto;
                 }
 
                 if (itemDto.getCollectionType() == null || !itemDto.getCollectionType().equals("music")) continue;

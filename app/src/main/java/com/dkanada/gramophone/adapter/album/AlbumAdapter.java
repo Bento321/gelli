@@ -90,14 +90,8 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
         final boolean isChecked = isChecked(album);
         holder.itemView.setActivated(isChecked);
 
-        if (holder.getBindingAdapterPosition() == getItemCount() - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator.setVisibility(View.GONE);
-            }
-        } else {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator.setVisibility(View.VISIBLE);
-            }
+        if (holder.shortSeparator != null) {
+            holder.shortSeparator.setVisibility(View.GONE);
         }
 
         if (holder.title != null) {

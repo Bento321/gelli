@@ -95,14 +95,8 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
         boolean isChecked = isChecked(song);
         holder.itemView.setActivated(isChecked);
 
-        if (holder.getBindingAdapterPosition() == getItemCount() - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator.setVisibility(View.GONE);
-            }
-        } else {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator.setVisibility(View.VISIBLE);
-            }
+        if (holder.shortSeparator != null) {
+            holder.shortSeparator.setVisibility(View.GONE);
         }
 
         if (holder.title != null) {

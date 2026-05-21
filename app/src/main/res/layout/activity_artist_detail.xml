@@ -45,7 +45,7 @@
                 app:layout_scrollFlags="scroll"
                 tools:ignore="UnusedAttribute">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/image"
                     android:layout_width="@dimen/detail_header_image_height"
                     android:layout_height="@dimen/detail_header_image_height"
@@ -53,6 +53,7 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/default_artist_image"
                     android:transitionName="@string/transition_artist_image"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Rounded12"
                     tools:ignore="ContentDescription" />
 
                 <LinearLayout

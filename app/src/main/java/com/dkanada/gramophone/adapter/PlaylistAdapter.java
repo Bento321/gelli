@@ -76,14 +76,8 @@ public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewH
             holder.title.setText(playlist.name);
         }
 
-        if (holder.getBindingAdapterPosition() == getItemCount() - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator.setVisibility(View.GONE);
-            }
-        } else {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator.setVisibility(View.VISIBLE);
-            }
+        if (holder.shortSeparator != null) {
+            holder.shortSeparator.setVisibility(View.GONE);
         }
 
         loadImage(playlist, holder);

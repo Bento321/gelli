@@ -19,6 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistsFragment extends AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager, ItemQuery> {
+    private boolean firstResume = true;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (firstResume) {
+            firstResume = false;
+            return;
+        }
+        invalidateAdapter();
+    }
+
     @NonNull
     @Override
     protected LinearLayoutManager createLayoutManager() {
@@ -42,7 +54,7 @@ public class PlaylistsFragment extends AbsLibraryPagerRecyclerViewFragment<Playl
         query.setRecursive(true);
         query.setLimit(PreferenceUtil.getInstance(App.getInstance()).getPageSize());
         query.setStartIndex(getAdapter().getItemCount());
-        query.setParentId(QueryUtil.currentLibrary.getId());
+        if (QueryUtil.playlistsView != null) query.setParentId(QueryUtil.playlistsView.getId());
 
         return query;
     }

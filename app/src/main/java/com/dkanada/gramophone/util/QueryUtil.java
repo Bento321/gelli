@@ -23,6 +23,7 @@ import java.util.List;
 
 public class QueryUtil {
     public static BaseItemDto currentLibrary;
+    public static BaseItemDto playlistsView;
 
     // TODO return BaseItemDto everywhere
     // will simplify the code for the getPlaylists method
@@ -46,7 +47,10 @@ public class QueryUtil {
     public static void getPlaylists(MediaCallback<Playlist> callback) {
         ItemQuery query = new ItemQuery();
         query.setIncludeItemTypes(new String[]{"Playlist"});
-        applyProperties(query);
+        query.setUserId(App.getApiClient().getCurrentUserId());
+        query.setRecursive(true);
+        query.setLimit(PreferenceUtil.getInstance(App.getInstance()).getPageSize());
+        if (playlistsView != null) query.setParentId(playlistsView.getId());
         App.getApiClient().GetItemsAsync(query, new Response<ItemsResult>() {
             @Override
             public void onResponse(ItemsResult result) {

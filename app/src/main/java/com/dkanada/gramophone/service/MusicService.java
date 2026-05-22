@@ -133,6 +133,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     private Handler uiThreadHandler;
     private ThrottledSeekHandler throttledSeekHandler;
     private CustomTarget<Bitmap> metadataTarget;
+    private boolean userPaused = false;
     private QueueHandler queueHandler;
     private ProgressHandler progressHandler;
 
@@ -175,6 +176,12 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
             notifyChange(STATE_CHANGED);
 
             if (ready) {
+                if (userPaused) {
+                    // ExoPlayer auto-resumed (e.g. audio focus regained after Gemini TTS)
+                    // but the user/assistant explicitly paused — re-apply the pause.
+                    playback.pause();
+                    return;
+                }
                 progressHandler.sendEmptyMessage(TRACK_STARTED);
             } else if (reason == PLAY_WHEN_READY_CHANGE_REASON_END_OF_MEDIA_ITEM) {
                 progressHandler.sendEmptyMessage(TRACK_ENDED);
@@ -662,10 +669,12 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     public void pause() {
+        userPaused = true;
         playback.pause();
     }
 
     public void play() {
+        userPaused = false;
         if (!playback.isPlaying()) {
             playback.start();
         }

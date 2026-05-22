@@ -2,7 +2,6 @@
 
 This is a fork of Gelli, a native music player for Android devices that connects to Jellyfin media servers. I created this fork to fix an issue I had with playlists, but have since added Android Auto support. 
 
-[<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90">](https://f-droid.org/packages/com.dkanada.gramophone)
 
 ## Features
 
